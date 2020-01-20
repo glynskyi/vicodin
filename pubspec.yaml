@@ -1,6 +1,6 @@
 name: vicodin
 description: Vicodin is a very simple and yet very useful pure Dart dependency container.
-version: 1.0.0
+version: 1.0.1
 author: dmytro.glynskyi@gmail.com
 homepage: https://github.com/glynskyi/vicodin
 
