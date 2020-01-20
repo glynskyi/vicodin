@@ -1,5 +1,6 @@
 import 'package:vicodin/module.dart';
 import 'package:vicodin/resolver.dart';
+import 'package:vicodin/shotcuts.dart';
 
 class Component implements Resolver {
   final Component _parentComponent;
@@ -9,7 +10,7 @@ class Component implements Resolver {
 
   T _resolveFromSubComponent<T>(Resolver resolver) {
     for (var module in _modules) {
-      final dependency = module.resolve<T>(this);
+      final dependency = module.resolve<T>(resolver);
       if (dependency != null) {
         return dependency;
       }
@@ -25,11 +26,16 @@ class Component implements Resolver {
         return dependency;
       }
     }
-    final dependency = _parentComponent?._resolveFromSubComponent(this);
     final T dependency = _parentComponent?._resolveFromSubComponent<T>(this);
     if (dependency != null) {
       return dependency;
     }
     throw StateError("Can't resolve $T");
+  }
+
+  Component bind<T>(T dependency) {
+    final module = moduleOf(
+        (registrar) => registrar.singleton<T>((resolver) => dependency));
+    return componentOf(parent: this, import: [module]);
   }
 }
