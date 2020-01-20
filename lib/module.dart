@@ -21,15 +21,15 @@ class Module implements Registrar {
 
   T resolve<T>(Resolver resolver) {
     if (_singletons.containsKey(T)) {
-      return _singletons[T];
+      return _singletons[T] as T;
     }
     if (_singletonDelegates.containsKey(T)) {
-      final T singleton = _singletonDelegates[T](resolver);
+      final T singleton = _singletonDelegates[T](resolver) as T;
       _singletons[T] = singleton;
       return singleton;
     }
     if (_factoryDelegates.containsKey(T)) {
-      return _factoryDelegates[T](resolver);
+      return _factoryDelegates[T](resolver) as T;
     }
     return null;
   }
