@@ -15,6 +15,14 @@ class Component implements Resolver {
         return dependency;
       }
     }
+    final T resolverDependency = _parentComponent?._resolveFromSubComponent<T>(resolver);
+    if (resolverDependency != null) {
+      return resolverDependency;
+    }
+    final T dependency = _parentComponent?._resolveFromSubComponent<T>(this);
+    if (dependency != null) {
+      return dependency;
+    }
     return null;
   }
 

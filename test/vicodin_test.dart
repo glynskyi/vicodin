@@ -4,9 +4,14 @@ import 'package:vicodin/vicodin.dart';
 class Person {
   final String firstName;
 
-  Person(
-    this.firstName,
-  );
+  Person(this.firstName);
+}
+
+class AgedPerson {
+  final String firstName;
+  final int age;
+
+  AgedPerson(this.firstName, this.age);
 }
 
 void main() {
@@ -41,8 +46,7 @@ void main() {
     });
 
     final parentComponent = componentOf(import: [nameModule]);
-    final subComponent =
-        componentOf(parent: parentComponent, import: [personModule]);
+    final subComponent = componentOf(parent: parentComponent, import: [personModule]);
 
     final Person person = subComponent.resolve();
     expect(person.firstName, "Vicodin");
@@ -58,5 +62,19 @@ void main() {
     final subComponent = component.bind<String>("Vicodin");
     final Person person = subComponent.resolve();
     expect(person.firstName, "Vicodin");
+  });
+
+  test('tests an hierarchy resolve', () {
+    final personModule = moduleOf((r) {
+      r.factory<AgedPerson>((c) => AgedPerson(c.resolve(), c.resolve()));
+    });
+
+    final personComponent = componentOf(import: [personModule]);
+    final nameComponent = personComponent.bind<String>("Vicodin");
+    final ageComponent = nameComponent.bind<int>(29);
+
+    final AgedPerson person = ageComponent.resolve();
+    expect(person.firstName, "Vicodin");
+    expect(person.age, 29);
   });
 }

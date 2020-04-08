@@ -1,3 +1,15 @@
+## 1.0.4
+
+* Fixed a main component resolving path
+
+## 1.0.3
+
+* Fixed a sub component resolving path
+
+## 1.0.2
+
+* Fixed a sub sub component 
+
 ## 1.0.1
 
 * Added the `component.bind<T>` method to quick resolve dependencies with argument
