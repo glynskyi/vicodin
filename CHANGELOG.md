@@ -1,3 +1,7 @@
+## 1.0.5-nullsafety.0
+
+* Migrated to the null-safety
+
 ## 1.0.4
 
 * Fixed a main component resolving path
