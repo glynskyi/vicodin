@@ -21,8 +21,8 @@ void main() {
     });
     final component = componentOf(import: [module]);
 
-    final Person person1 = component.resolve();
-    final Person person2 = component.resolve();
+    final person1 = component.resolve<Person>();
+    final person2 = component.resolve<Person>();
     expect(identical(person1, person2), true);
   });
 
@@ -32,8 +32,8 @@ void main() {
     });
     final component = componentOf(import: [module]);
 
-    final Person person1 = component.resolve();
-    final Person person2 = component.resolve();
+    final person1 = component.resolve<Person>();
+    final person2 = component.resolve<Person>();
     expect(identical(person1, person2), false);
   });
 
@@ -48,7 +48,7 @@ void main() {
     final parentComponent = componentOf(import: [nameModule]);
     final subComponent = componentOf(parent: parentComponent, import: [personModule]);
 
-    final Person person = subComponent.resolve();
+    final person = subComponent.resolve<Person>();
     expect(person.firstName, "Vicodin");
   });
 
@@ -60,7 +60,7 @@ void main() {
     final component = componentOf(import: [personModule]);
 
     final subComponent = component.bind<String>("Vicodin");
-    final Person person = subComponent.resolve();
+    final person = subComponent.resolve<Person>();
     expect(person.firstName, "Vicodin");
   });
 
@@ -73,7 +73,7 @@ void main() {
     final nameComponent = personComponent.bind<String>("Vicodin");
     final ageComponent = nameComponent.bind<int>(29);
 
-    final AgedPerson person = ageComponent.resolve();
+    final person = ageComponent.resolve<AgedPerson>();
     expect(person.firstName, "Vicodin");
     expect(person.age, 29);
   });

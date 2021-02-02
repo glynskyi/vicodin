@@ -1,4 +1,4 @@
-import 'package:vicodin/delegates.dart';
+import 'package:vicodin/src/delegates.dart';
 
 abstract class Registrar {
   void singleton<T>(ResolveDelegate<T> delegate);

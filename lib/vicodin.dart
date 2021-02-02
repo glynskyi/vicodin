@@ -1,8 +1,8 @@
 library vicodin;
 
-export 'package:vicodin/component.dart';
-export 'package:vicodin/delegates.dart';
-export 'package:vicodin/module.dart';
-export 'package:vicodin/registrar.dart';
-export 'package:vicodin/resolver.dart';
-export 'package:vicodin/shotcuts.dart';
+export 'package:vicodin/src/component.dart';
+export 'package:vicodin/src/delegates.dart';
+export 'package:vicodin/src/module.dart';
+export 'package:vicodin/src/registrar.dart';
+export 'package:vicodin/src/resolver.dart';
+export 'package:vicodin/src/shotcuts.dart';
