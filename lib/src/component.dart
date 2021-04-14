@@ -9,13 +9,14 @@ class Component implements Resolver {
   Component(this._parentComponent, this._modules);
 
   T? _resolveFromSubComponent<T>(Resolver resolver) {
-    for (var module in _modules) {
+    for (final module in _modules) {
       final dependency = module.resolve<T>(resolver);
       if (dependency != null) {
         return dependency;
       }
     }
-    final resolverDependency = _parentComponent?._resolveFromSubComponent<T>(resolver);
+    final resolverDependency =
+        _parentComponent?._resolveFromSubComponent<T>(resolver);
     if (resolverDependency != null) {
       return resolverDependency;
     }
@@ -28,7 +29,7 @@ class Component implements Resolver {
 
   @override
   T resolve<T>() {
-    for (var module in _modules) {
+    for (final module in _modules) {
       final dependency = module.resolve<T>(this);
       if (dependency != null) {
         return dependency;
@@ -42,7 +43,8 @@ class Component implements Resolver {
   }
 
   Component bind<T>(T dependency) {
-    final module = moduleOf((registrar) => registrar.singleton<T>((resolver) => dependency));
+    final module = moduleOf(
+        (registrar) => registrar.singleton<T>((resolver) => dependency));
     return componentOf(parent: this, import: [module]);
   }
 }
